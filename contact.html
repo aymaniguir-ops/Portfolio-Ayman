@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — Ayman</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .contact-wrap {
+      min-height: calc(100vh - 72px);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    /* ── LEFT ── */
+    .contact-left {
+      padding: 6rem 5vw 5rem;
+      border-right: 1px solid var(--light);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .contact-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .contact-left h1 {
+      font-family: var(--font-display);
+      font-size: clamp(3.5rem, 6vw, 6rem);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 0.95;
+      margin-bottom: 2rem;
+    }
+
+    .contact-left h1 em { font-style: italic; color: var(--accent); }
+
+    .contact-left p {
+      font-size: 1.05rem;
+      color: var(--mid);
+      font-weight: 300;
+      line-height: 1.8;
+      max-width: 380px;
+      margin-bottom: 3rem;
+    }
+
+    .contact-left p strong { color: var(--ink); font-weight: 600; }
+
+    /* Email big link */
+    .email-big {
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
+      font-family: var(--font-display);
+      font-size: clamp(1rem, 2vw, 1.5rem);
+      font-weight: 700;
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 2px solid var(--ink);
+      padding-bottom: 0.3rem;
+      transition: color 0.2s, border-color 0.2s;
+      word-break: break-all;
+    }
+
+    .email-big:hover { color: var(--accent); border-color: var(--accent); }
+
+    .contact-socials {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 3rem;
+    }
+
+    .social-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 0;
+      border-top: 1px solid var(--light);
+      text-decoration: none;
+      color: var(--ink);
+      transition: padding-left 0.25s;
+    }
+
+    .social-row:hover { padding-left: 0.5rem; }
+    .social-row:hover .social-name { color: var(--accent); }
+
+    .social-left { display: flex; align-items: center; gap: 0.8rem; }
+    .social-emoji { font-size: 1.2rem; }
+
+    .social-name {
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+
+    .social-handle {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .social-arrow { color: var(--muted); font-size: 1rem; transition: transform 0.2s; }
+    .social-row:hover .social-arrow { transform: translateX(4px); color: var(--accent); }
+
+    /* ── RIGHT ── */
+    .contact-right {
+      background: var(--off);
+      padding: 6rem 4vw 5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-right::before {
+      content: '@';
+      position: absolute;
+      right: -5%;
+      bottom: -10%;
+      font-family: var(--font-display);
+      font-size: 22rem;
+      font-weight: 900;
+      color: var(--light);
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .contact-right h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 2.5vw, 2.2rem);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      margin-bottom: 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Form */
+    .form-group {
+      margin-bottom: 1.4rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 0.5rem;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      background: var(--white);
+      border: 1.5px solid var(--light);
+      border-radius: var(--radius);
+      padding: 0.9rem 1.1rem;
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      color: var(--ink);
+      outline: none;
+      transition: border-color 0.2s;
+      resize: none;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: var(--ink);
+    }
+
+    .form-group textarea { min-height: 130px; }
+
+    .form-submit {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: var(--ink);
+      color: var(--white);
+      border: none;
+      border-radius: var(--radius);
+      padding: 1rem 2.2rem;
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: none;
+      transition: background 0.2s, transform 0.2s;
+      position: relative;
+      z-index: 1;
+    }
+
+    .form-submit:hover {
+      background: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .success-msg {
+      display: none;
+      background: #dcfce7;
+      border: 1.5px solid #86efac;
+      border-radius: var(--radius);
+      padding: 1rem 1.2rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #166534;
+      margin-top: 1rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    @media (max-width: 768px) {
+      .contact-wrap { grid-template-columns: 1fr; }
+      .contact-right { padding: 3rem 5vw; }
+      .contact-right::before { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursor-ring"></div>
+
+  <nav>
+    <a href="index.html" class="nav-logo">Ayman<sup>©</sup></a>
+    <ul class="nav-links">
+      <li><a href="index.html"><span>Accueil</span></a></li>
+      <li><a href="projets.html"><span>Projets</span></a></li>
+      <li><a href="competences.html"><span>Compétences</span></a></li>
+      <li><a href="contact.html" class="active"><span>Contact</span></a></li>
+    </ul>
+  </nav>
+
+  <main class="page">
+    <div class="contact-wrap">
+
+      <!-- LEFT -->
+      <div class="contact-left reveal">
+        <div>
+          <span class="contact-label">✦ Parlons-nous</span>
+          <h1>Tra-<br />vaillons<br /><em>ensemble.</em></h1>
+          <p>Tu as un projet en tête ? Une idée à développer, un site à créer ? Je suis <strong>disponible et motivé</strong> — réponds généralement en moins de 24h.</p>
+          <a href="mailto:aymaniguir@gmail.com" class="email-big">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            aymaniguir@gmail.com
+          </a>
+        </div>
+
+        <div class="contact-socials">
+          <a href="mailto:aymaniguir@gmail.com" class="social-row">
+            <div class="social-left">
+              <span class="social-emoji">📧</span>
+              <div>
+                <div class="social-name">Email</div>
+                <div class="social-handle">aymaniguir@gmail.com</div>
+              </div>
+            </div>
+            <span class="social-arrow">→</span>
+          </a>
+          <a href="https://instagram.com/igr_ayman" target="_blank" class="social-row">
+            <div class="social-left">
+              <span class="social-emoji">📸</span>
+              <div>
+                <div class="social-name">Instagram</div>
+                <div class="social-handle">@igr_ayman</div>
+              </div>
+            </div>
+            <span class="social-arrow">→</span>
+          </a>
+          <a href="https://discord.com/users/aiservice" target="_blank" class="social-row">
+            <div class="social-left">
+              <span class="social-emoji">🎮</span>
+              <div>
+                <div class="social-name">Discord</div>
+                <div class="social-handle">aiservice</div>
+              </div>
+            </div>
+            <span class="social-arrow">→</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- RIGHT : FORM -->
+      <div class="contact-right reveal">
+        <h2>Envoie-moi<br />un message</h2>
+        <div class="form-group">
+          <label>Ton nom</label>
+          <input type="text" id="name" name="name" placeholder="Jean Dupont" />
+        </div>
+        <div class="form-group">
+          <label>Ton email</label>
+          <input type="email" id="email" name="email" placeholder="jean@exemple.com" />
+        </div>
+        <div class="form-group">
+          <label>Ton message</label>
+          <textarea id="message" name="message" placeholder="Bonjour Ayman, j'ai un projet..."></textarea>
+        </div>
+        <button class="form-submit" onclick="sendMessage()">
+          Envoyer
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+        <div class="success-msg" id="success">
+          ✅ Message envoyé ! Je te réponds très vite.
+        </div>
+        <div class="success-msg" id="error" style="background:#fee2e2; border-color:#fca5a5; color:#991b1b; display:none;">
+          ❌ Une erreur s'est produite. Réessaie ou écris-moi directement.
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <span>© 2025 <strong>Ayman</strong> — Tous droits réservés</span>
+    <span>Fait avec passion 🔥</span>
+  </footer>
+
+  <script>
+    // Cursor
+    const cursor = document.getElementById('cursor');
+    const ring = document.getElementById('cursor-ring');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX; my = e.clientY;
+      cursor.style.left = mx + 'px';
+      cursor.style.top = my + 'px';
+    });
+    function animRing() {
+      rx += (mx - rx) * 0.12;
+      ry += (my - ry) * 0.12;
+      ring.style.left = rx + 'px';
+      ring.style.top = ry + 'px';
+      requestAnimationFrame(animRing);
+    }
+    animRing();
+    document.querySelectorAll('a, button').forEach(el => {
+      el.addEventListener('mouseenter', () => { cursor.style.width='20px'; cursor.style.height='20px'; ring.style.width='56px'; ring.style.height='56px'; });
+      el.addEventListener('mouseleave', () => { cursor.style.width='10px'; cursor.style.height='10px'; ring.style.width='36px'; ring.style.height='36px'; });
+    });
+
+    async function sendMessage() {
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const msg = document.getElementById('message').value.trim();
+
+      if (!name || !email || !msg) {
+        alert('Merci de remplir tous les champs !');
+        return;
+      }
+
+      const btn = document.querySelector('.form-submit');
+      btn.textContent = 'Envoi en cours...';
+      btn.disabled = true;
+
+      try {
+        const res = await fetch('https://formspree.io/f/meelyblv', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({ name, email, message: msg })
+        });
+
+        if (res.ok) {
+          document.getElementById('success').style.display = 'block';
+          document.getElementById('error').style.display = 'none';
+          document.getElementById('name').value = '';
+          document.getElementById('email').value = '';
+          document.getElementById('message').value = '';
+          btn.textContent = 'Envoyé ✓';
+        } else {
+          throw new Error();
+        }
+      } catch {
+        document.getElementById('error').style.display = 'block';
+        document.getElementById('success').style.display = 'none';
+        btn.textContent = 'Envoyer';
+        btn.disabled = false;
+      }
+    }
+
+    // Reveal
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 100);
+      });
+    }, { threshold: 0.05 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

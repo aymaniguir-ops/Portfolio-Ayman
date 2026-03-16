@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ayman — Digital & IA</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ── HERO ── */
+    .hero {
+      min-height: calc(100vh - 72px);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-left {
+      padding: 7vw 5vw 5vw 5vw;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border-right: 1px solid var(--light);
+      position: relative;
+    }
+
+    .hero-right {
+      background: var(--off);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin-bottom: 2rem;
+      animation: fadeUp 0.6s ease both;
+    }
+
+    .hero-eyebrow span {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--mid);
+    }
+
+    .dot-live {
+      width: 8px; height: 8px;
+      background: #22c55e;
+      border-radius: 50%;
+      animation: pulse-green 2s ease infinite;
+    }
+
+    @keyframes pulse-green {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(34,197,94,0.4); }
+      50% { box-shadow: 0 0 0 6px rgba(34,197,94,0); }
+    }
+
+    .hero-name {
+      font-family: var(--font-display);
+      font-size: clamp(4rem, 8vw, 7.5rem);
+      font-weight: 900;
+      line-height: 0.92;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+      margin-bottom: 0.2em;
+      animation: fadeUp 0.6s 0.1s ease both;
+    }
+
+    .hero-name em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .hero-tagline {
+      font-size: clamp(1rem, 1.4vw, 1.2rem);
+      color: var(--mid);
+      font-weight: 300;
+      max-width: 420px;
+      line-height: 1.7;
+      margin-top: 1.5rem;
+      margin-bottom: 3rem;
+      animation: fadeUp 0.6s 0.2s ease both;
+      border-left: 3px solid var(--accent);
+      padding-left: 1.2rem;
+    }
+
+    .hero-tagline strong { color: var(--ink); font-weight: 600; }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      animation: fadeUp 0.6s 0.3s ease both;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.9rem 2rem;
+      border-radius: var(--radius);
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.25s;
+      cursor: none;
+    }
+
+    .btn-fill {
+      background: var(--ink);
+      color: var(--white);
+      border: 2px solid var(--ink);
+    }
+
+    .btn-fill:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--ink);
+      border: 2px solid var(--ink);
+    }
+
+    .btn-outline:hover {
+      background: var(--ink);
+      color: var(--white);
+      transform: translateY(-2px);
+    }
+
+    /* Hero right side */
+    .hero-visual-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--light) 1px, transparent 1px),
+        linear-gradient(90deg, var(--light) 1px, transparent 1px);
+      background-size: 40px 40px;
+      opacity: 0.6;
+    }
+
+    .hero-card {
+      position: relative;
+      z-index: 2;
+      background: var(--white);
+      border: 1px solid var(--light);
+      padding: 2.5rem;
+      max-width: 320px;
+      width: 90%;
+      box-shadow: 8px 8px 0 var(--ink);
+      animation: slideLeft 0.8s 0.3s ease both;
+    }
+
+    .hero-card-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    .hero-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 1.2rem;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-card-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      border-top: 1px solid var(--light);
+      padding-top: 1.2rem;
+    }
+
+    .hero-stat-item strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--ink);
+      line-height: 1;
+    }
+
+    .hero-stat-item span {
+      font-size: 0.72rem;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 2rem;
+      left: 5vw;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      animation: fadeIn 1s 1s ease both;
+    }
+
+    .scroll-line {
+      width: 40px; height: 1px;
+      background: var(--muted);
+      transform-origin: left;
+      animation: drawLine 1s 1.2s ease both;
+    }
+
+    /* ── À PROPOS STRIP ── */
+    .about-strip {
+      background: var(--ink);
+      color: var(--white);
+      padding: 4rem 5vw;
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .about-strip h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+    }
+
+    .about-strip h2 em { color: var(--accent); font-style: italic; }
+
+    .about-strip p {
+      color: rgba(255,255,255,0.6);
+      font-size: 1rem;
+      line-height: 1.8;
+      font-weight: 300;
+    }
+
+    .about-strip p strong { color: var(--white); font-weight: 600; }
+
+    /* ── FEATURED PROJECT ── */
+    .featured {
+      padding: 6rem 5vw;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 3rem;
+      padding-bottom: 1.2rem;
+      border-bottom: 1px solid var(--light);
+    }
+
+    .section-header h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+    }
+
+    .section-header a {
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: gap 0.2s;
+    }
+
+    .section-header a:hover { gap: 0.7rem; }
+
+    .featured-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 1.5px;
+      background: var(--light);
+      border: 1.5px solid var(--light);
+    }
+
+    .feat-card {
+      background: var(--white);
+      padding: 2.5rem;
+      transition: background 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feat-card:hover { background: var(--off); }
+
+    .feat-card-num {
+      font-family: var(--font-display);
+      font-size: 4rem;
+      font-weight: 900;
+      color: var(--light);
+      line-height: 1;
+      margin-bottom: 1rem;
+      transition: color 0.25s;
+    }
+
+    .feat-card:hover .feat-card-num { color: var(--accent); opacity: 0.3; }
+
+    .feat-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+    }
+
+    .feat-card p {
+      font-size: 0.88rem;
+      color: var(--mid);
+      line-height: 1.65;
+      margin-bottom: 1.5rem;
+    }
+
+    .feat-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .tag-row { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+
+    .tag {
+      background: var(--off);
+      border: 1px solid var(--light);
+      border-radius: 2px;
+      padding: 0.2rem 0.6rem;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--mid);
+    }
+
+    .link-arrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+      transition: color 0.2s, gap 0.2s;
+      cursor: none;
+    }
+
+    .link-arrow:hover { color: var(--accent); gap: 0.6rem; }
+
+    .feat-card-side {
+      background: var(--off);
+      display: flex;
+      flex-direction: column;
+      gap: 1.5px;
+    }
+
+    .feat-mini {
+      background: var(--white);
+      padding: 1.8rem 2rem;
+      flex: 1;
+      transition: background 0.25s;
+    }
+
+    .feat-mini:hover { background: var(--off); }
+
+    .feat-mini h3 {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.4rem;
+    }
+
+    .feat-mini p {
+      font-size: 0.82rem;
+      color: var(--mid);
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-right { display: none; }
+      .about-strip { grid-template-columns: 1fr; gap: 1.5rem; }
+      .featured-grid { grid-template-columns: 1fr; }
+      .feat-card-side { flex-direction: row; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursor-ring"></div>
+
+  <nav>
+    <a href="index.html" class="nav-logo">Ayman<sup>©</sup></a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active"><span>Accueil</span></a></li>
+      <li><a href="projets.html"><span>Projets</span></a></li>
+      <li><a href="competences.html"><span>Compétences</span></a></li>
+      <li><a href="contact.html"><span>Contact</span></a></li>
+    </ul>
+  </nav>
+
+  <main class="page">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-left">
+        <div class="hero-eyebrow">
+          <div class="dot-live"></div>
+          <span>Disponible pour des projets</span>
+        </div>
+        <h1 class="hero-name">Je suis<br /><em>Ayman.</em></h1>
+        <p class="hero-tagline">
+          Je crée des <strong>sites web modernes</strong> et des <strong>solutions optimisées avec l'IA</strong> — no-code, automatisation et business digital.
+        </p>
+        <div class="hero-cta">
+          <a href="projets.html" class="btn btn-fill">
+            Mes projets
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="competences.html" class="btn btn-outline">Compétences</a>
+        </div>
+        <div class="hero-scroll">
+          <div class="scroll-line"></div>
+          Scroll
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="hero-visual-grid"></div>
+        <div class="hero-card">
+          <div class="hero-card-label">✦ Profil rapide</div>
+          <h3>Business · Web · IA</h3>
+          <div class="hero-card-stats">
+            <div class="hero-stat-item">
+              <strong>15</strong>
+              <span>Ans</span>
+            </div>
+            <div class="hero-stat-item">
+              <strong>4</strong>
+              <span>Projets</span>
+            </div>
+            <div class="hero-stat-item">
+              <strong>∞</strong>
+              <span>Motivation</span>
+            </div>
+            <div class="hero-stat-item">
+              <strong>100%</strong>
+              <span>Sérieux</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- À PROPOS STRIP -->
+    <div class="about-strip reveal">
+      <h2>Qui suis-<em>je</em>&nbsp;?</h2>
+      <p>
+        J'ai <strong>15 ans</strong> et je suis passionné par le digital, le no-code et l'intelligence artificielle.
+        En formation sur la <strong>création de sites web</strong>, l'<strong>automatisation</strong> et l'<strong>IA appliquée au business</strong>,
+        mon objectif est de construire des solutions efficaces et d'évoluer dans le monde du <strong>business tech</strong>.
+      </p>
+    </div>
+
+    <!-- PROJETS FEATURED -->
+    <section class="featured">
+      <div class="section-header reveal">
+        <h2>Projets récents</h2>
+        <a href="projets.html">Voir tout →</a>
+      </div>
+      <div class="featured-grid reveal">
+        <!-- Main featured -->
+        <div class="feat-card">
+          <div class="feat-card-num">01</div>
+          <h3>Viraly.ia</h3>
+          <p>Landing page SaaS propulsée par l'IA. Stratégie de contenu, score de viralité et calendrier éditorial générés en 30 secondes.</p>
+          <div class="feat-card-footer">
+            <div class="tag-row">
+              <span class="tag">HTML/CSS</span>
+              <span class="tag">JS</span>
+              <span class="tag">IA</span>
+            </div>
+            <a href="https://viraly-ia.vercel.app/" target="_blank" class="link-arrow">
+              Démo →
+            </a>
+          </div>
+        </div>
+        <!-- Side mini cards -->
+        <div class="feat-card-side">
+          <div class="feat-mini">
+            <h3>SocialForma</h3>
+            <p>Landing page cabinet URSSAF. Audit social & conformité pour entreprises.</p>
+            <a href="https://social-forma.vercel.app/" target="_blank" class="link-arrow">Démo →</a>
+          </div>
+          <div class="feat-mini">
+            <h3>Dino Odyssey</h3>
+            <p>Jeu web interactif créé de A à Z en HTML/CSS/JS.</p>
+            <a href="projets.html" class="link-arrow">Voir →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <span>© 2025 <strong>Ayman</strong> — Tous droits réservés</span>
+    <span>Fait avec passion 🔥</span>
+  </footer>
+
+  <script>
+    // Cursor
+    const cursor = document.getElementById('cursor');
+    const ring = document.getElementById('cursor-ring');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX; my = e.clientY;
+      cursor.style.left = mx + 'px';
+      cursor.style.top = my + 'px';
+    });
+
+    function animRing() {
+      rx += (mx - rx) * 0.12;
+      ry += (my - ry) * 0.12;
+      ring.style.left = rx + 'px';
+      ring.style.top = ry + 'px';
+      requestAnimationFrame(animRing);
+    }
+    animRing();
+
+    document.querySelectorAll('a, button').forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        cursor.style.width = '20px';
+        cursor.style.height = '20px';
+        ring.style.width = '56px';
+        ring.style.height = '56px';
+      });
+      el.addEventListener('mouseleave', () => {
+        cursor.style.width = '10px';
+        cursor.style.height = '10px';
+        ring.style.width = '36px';
+        ring.style.height = '36px';
+      });
+    });
+
+    // Reveal on scroll
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 100);
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
